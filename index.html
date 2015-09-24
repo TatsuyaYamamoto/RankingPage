@@ -87,46 +87,39 @@ module.controller('myController', function($scope, $http) {
 </head>
 <body>
 
-
+<div ng-controller="myController">
 
 <h1>スコアランキング</h1>
 
 
-      <nav class="navbar navbar-default" role="navigation">
+	<nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
 
 
-          <!-- グローバルナビの中身 -->
-          <div class="collapse navbar-collapse" id="nav-menu-1">
+			<!-- グローバルナビの中身 -->
+			<div class="collapse navbar-collapse" id="nav-menu-1">
             
-            <!-- 各ナビゲーションメニュー -->
-            <ul class="nav navbar-nav">
+	            <!-- 各ナビゲーションメニュー -->
+	            <ul class="nav navbar-nav">
 
-				<!-- ドロップダウンのメニューも配置可能 -->
-				<li class="dropdown">
-	                <a href="#" class="dropdown-toggle" data-toggle="dropdown">SELECT GAME <b class="caret"></b></a>
-	                <ul class="dropdown-menu">
-						<li class="active"><a href="?game_name=honocar">ほのCar!</a></li>
-						<li><a href="?game_name=next">next?</a></li>
-	                </ul>
-				</li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-				<li ng-show="$scope.isLogin"><a href="http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/oauth/login?game_name=ranking">LOGIN</a></li>
-				<li ng-show="!$scope.isLogin"><a href="http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/oauth/logout?game_name=ranking">LOGOUT</a></li>
-        	</ul>
-          </div>
+					<!-- ドロップダウンのメニューも配置可能 -->
+					<li class="dropdown">
+		                <a href="#" class="dropdown-toggle" data-toggle="dropdown">SELECT GAME <b class="caret"></b></a>
+		                <ul class="dropdown-menu">
+							<li class="active"><a href="?game_name=honocar">ほのCar!</a></li>
+							<li><a href="?game_name=next">next?</a></li>
+		                </ul>
+					</li>
+	            </ul>
+	            <ul class="nav navbar-nav navbar-right">
+					<li ng-show="!isLogin"><a href="http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/oauth/login?game_name=ranking">LOGIN</a></li>
+					<li ng-show="isLogin"><a href="http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/oauth/logout?game_name=ranking">LOGOUT</a></li>
+	        	</ul>
+			</div>
         </div>
-      </nav>
+	</nav>
 
-
-
-
-<!--コントローラーを適用2-->
-<div ng-controller="myController">
-
-
-<h2>{{gameTitle}} TOP 10 </h2>
+	<h2>{{gameTitle}} TOP 10 </h2>
     <table class="table">
 		<tr>
 			<th>RANKING</th>
