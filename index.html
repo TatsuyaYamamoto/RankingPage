@@ -138,7 +138,7 @@ module.controller('myController', function($scope, $http) {
         </tr>
     </table>
 
-    <div ng-show="{{isLogin}}">
+    <div ng-show={{isLogin}}>
 		<h2>My ranking</h2>
 		{{myRankingInfo.ranking}}
 	</div>
