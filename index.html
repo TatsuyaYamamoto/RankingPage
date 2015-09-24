@@ -71,7 +71,8 @@ module.controller('myController', function($scope, $http) {
 		// ログイン中のアカウントのランキング情報
 	    $http({
 	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/scores/honocar/me",
-	        method: 'GET'
+	        method: 'GET',
+	        withCredentials: true
 	    }).success(function (data, status, headers, config) {
 	    	$scope.myRankingInfo = data;
 	    	$scope.isLogin = true;
