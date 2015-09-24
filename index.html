@@ -70,7 +70,7 @@ module.controller('myController', function($scope, $http) {
 
 		// ログイン中のアカウントのランキング情報
 	    $http({
-	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/scores/" + game_name + "/me",
+	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/scores/" + game_name +"/me",
 	        method: 'GET',
 	        withCredentials: true
 	    }).success(function (data, status, headers, config) {
@@ -112,8 +112,8 @@ module.controller('myController', function($scope, $http) {
 				</li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-				<li ng-if="isLogin"><a href="http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/oauth/login?game_name=ranking">LOGIN</a></li>
-				<li ng-if="!isLogin"><a href="http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/oauth/logout?game_name=ranking">LOGOUT</a></li>
+				<li ng-show="$scope.isLogin"><a href="http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/oauth/login?game_name=ranking">LOGIN</a></li>
+				<li ng-show="!$scope.isLogin"><a href="http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/oauth/logout?game_name=ranking">LOGOUT</a></li>
         	</ul>
           </div>
         </div>
