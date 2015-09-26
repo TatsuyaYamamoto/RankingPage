@@ -53,6 +53,8 @@ module.controller('myController', function($scope, $http) {
 	$scope.gameTitle = getGameTitle();
 
 	if(game_name != undefined){
+
+		$scope.isSelected = true;
 		// ランキング
 	    $http({
 	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/scores/"+game_name+"/ranking",
@@ -79,6 +81,8 @@ module.controller('myController', function($scope, $http) {
 	    }).error(function (data, status, headers, config) {
 	    	$scope.isLogin = false;
 	    });
+	}else{
+		$scope.isSelected = false;
 	}
 });
 
@@ -106,7 +110,7 @@ module.controller('myController', function($scope, $http) {
 					<li class="dropdown">
 		                <a href="#" class="dropdown-toggle" data-toggle="dropdown">SELECT GAME <b class="caret"></b></a>
 		                <ul class="dropdown-menu">
-							<li class="active"><a href="?game_name=honocar">ほのCar!</a></li>
+							<li><a href="?game_name=honocar">ほのCar!</a></li>
 							<li><a href="?game_name=next">next?</a></li>
 		                </ul>
 					</li>
@@ -118,21 +122,21 @@ module.controller('myController', function($scope, $http) {
 			</div>
         </div>
 	</nav>
-
-	<h2>{{gameTitle}} TOP 10 </h2>
-    <table class="table">
-		<tr>
-			<th>RANKING</th>
-			<th>NAME</th>
-			<th>SCORE</th>
-	    </tr>
-	    <tr ng-repeat="result in rankingTable">
-            <td>{{result.ranking}}</td>
-		    <td>{{result.user_name}}</td>
-            <td>{{result.point}}</td>
-        </tr>
-    </table>
-
+	<div ng-show="isSelected">
+		<h2>{{gameTitle}} TOP 10 </h2>
+	    <table class="table">
+			<tr>
+				<th>RANKING</th>
+				<th>NAME</th>
+				<th>SCORE</th>
+		    </tr>
+		    <tr ng-repeat="result in rankingTable">
+	            <td>{{result.ranking}}</td>
+			    <td>{{result.user_name}}</td>
+	            <td>{{result.point}}</td>
+	        </tr>
+	    </table>
+	</div>
     <div ng-show="isLogin">
 		<h2>My ranking</h2>
 		{{myRankingInfo.ranking}}
