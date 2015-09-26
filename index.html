@@ -54,7 +54,6 @@ module.controller('myController', function($scope, $http) {
 
 	if(game_name != undefined){
 
-		$scope.isSelected = true;
 		// ランキング
 	    $http({
 	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/scores/"+game_name+"/ranking",
@@ -81,10 +80,10 @@ module.controller('myController', function($scope, $http) {
 	    }).error(function (data, status, headers, config) {
 	    	$scope.isLogin = false;
 	    });
+		$scope.isSelected = true;
 	}else{
 		$scope.isSelected = false;
 	}
-	alert({{isSelected}})
 });
 
 </script>
