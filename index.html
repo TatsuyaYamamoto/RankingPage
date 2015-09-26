@@ -84,6 +84,7 @@ module.controller('myController', function($scope, $http) {
 	}else{
 		$scope.isSelected = false;
 	}
+	alert({{isSelected}})
 });
 
 </script>
@@ -123,7 +124,7 @@ module.controller('myController', function($scope, $http) {
         </div>
 	</nav>
 
-	
+
 	<div ng-show="isSelected">
 		<h2>{{gameTitle}} TOP 10 </h2>
 	    <table class="table">
