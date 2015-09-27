@@ -44,6 +44,18 @@ function getGameTitle(){
 var module = angular.module('myApp', []);
 module.controller('myController', function($scope, $http) {
 
+
+    /* login check */
+    $http({
+        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/twitter/oauth/check",
+        method: 'GET',
+        withCredentials: true
+    }).success(function (data, status, headers, config) {
+    	$scope.isLogin = true;
+    }).error(function (data, status, headers, config) {
+    	$scope.isLogin = false;
+    });
+
 	var game_name = getQueryGameName();
 
 
@@ -75,18 +87,6 @@ module.controller('myController', function($scope, $http) {
 	    }).success(function (data, status, headers, config) {
 	    	$scope.myRankingInfo = data;
 	    });
-
-	    /* login check */
-	    $http({
-	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/twitter/oauth/check",
-	        method: 'GET',
-	        withCredentials: true
-	    }).success(function (data, status, headers, config) {
-	    	$scope.isLogin = true;
-	    }).error(function (data, status, headers, config) {
-	    	$scope.isLogin = false;
-	    });
-
 	}else{
 		$scope.isSelected = false;
 	}
