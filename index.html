@@ -41,10 +41,7 @@ function getGameTitle(){
 }
 
 
-// myAppモジュールを新規に作成
 var module = angular.module('myApp', []);
-
-// myAppモジュールにmyControllerコントローラーを登録1
 module.controller('myController', function($scope, $http) {
 
 	var game_name = getQueryGameName();
@@ -54,7 +51,9 @@ module.controller('myController', function($scope, $http) {
 
 	if(game_name != undefined){
 
-		// ランキング
+		$scope.isSelected = true;
+
+		/* higher ranking */
 	    $http({
 	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/scores/"+game_name+"/ranking",
 	        method: 'GET'
@@ -66,23 +65,28 @@ module.controller('myController', function($scope, $http) {
 	    		i ++;
 	    	}
 	    	$scope.rankingTable = data;
-	    }).error(function (data, status, headers, config) {
-	    	// $scope.rankingTable = [{"game_name":"honocar","user_name":"xxsanzashixx","point":31},{"game_name":"honocar","user_name":"xxsanzashixx","point":31}];
 	    });
 
-		// ログイン中のアカウントのランキング情報
+		/* ログインアカウントのランキング */
 	    $http({
 	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/scores/" + game_name +"/me",
 	        method: 'GET',
 	        withCredentials: true
 	    }).success(function (data, status, headers, config) {
 	    	$scope.myRankingInfo = data;
+	    });
+
+	    /* login check */
+	    $http({
+	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/twitter/oauth/check",
+	        method: 'GET',
+	        withCredentials: true
+	    }).success(function (data, status, headers, config) {
 	    	$scope.isLogin = true;
 	    }).error(function (data, status, headers, config) {
-	    	$scope.myRankingInfo = {"final_date":"2015-09-24 10:23:40.0","game_name":"honocar","user_id":123121,"count":1,"ranking":10,"create_date":"2015-09-24 10:23:40.0","point":100,"update_date":"2015-09-24 10:23:40.0","user_name":"hogehoge"};
 	    	$scope.isLogin = false;
 	    });
-		$scope.isSelected = true;
+
 	}else{
 		$scope.isSelected = false;
 	}
@@ -164,37 +168,5 @@ module.controller('myController', function($scope, $http) {
 	</div>
 </div>
 
-<!-- 
-
-
-	<h1>スコアランキング</h1>
-
-
-	<nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-
-
-
-			<div class="collapse navbar-collapse" id="nav-menu-1">
-            
-	            <ul class="nav navbar-nav">
-
-					<li class="dropdown">
-		                <a href="#" class="dropdown-toggle" data-toggle="dropdown">SELECT GAME <b class="caret"></b></a>
-		                <ul class="dropdown-menu">
-							<li><a href="?game_name=honocar">ほのCar!</a></li>
-							<li><a href="?game_name=next">next?</a></li>
-		                </ul>
-					</li>
-	            </ul>
-	            <ul class="nav navbar-nav navbar-right">
-					<li ng-show="!isLogin"><a href="http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/twitter/oauth/login?game_name=ranking">LOGIN</a></li>
-					<li ng-show="isLogin"><a href="http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/twitter/oauth/logout?game_name=ranking">LOGOUT</a></li>
-	        	</ul>
-			</div>
-        </div>
-	</nav>
-
- -->
 </body>
 </html>
