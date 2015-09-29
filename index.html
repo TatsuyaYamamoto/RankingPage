@@ -58,7 +58,7 @@ module.controller('myController', function($scope, $http) {
 	        method: 'POST',
 	        withCredentials: true,
 	        data: $.param({
-	        	user_name: $scope.user_name;
+	        	user_name: $scope.user_name
 	        })
 	    }).success(function (data, status, headers, config) {
 	    	alert("ユーザー名を変更しました！");
