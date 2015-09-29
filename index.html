@@ -19,11 +19,47 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script>
 
+
+var module = angular.module('myApp', []);
+module.controller('myController', function($scope, $http) {
+
+	var game_name = getQueryGameName();
+	$scope.gameTitle = getGameTitle(game_name);
+
+	/* higher ranking */
+    $http({
+        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/scores/"+game_name+"/ranking",
+        method: 'GET'
+    }).success(function (data, status, headers, config) {
+    	var i = 1
+    	for(var key in data){
+    		data[key].ranking = i;
+    		i ++;
+    	}
+    	$scope.rankingTable = data;
+    });
+
+
+	/* ログインアカウントのランキング */
+    $http({
+        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/scores/" + game_name +"/me",
+        method: 'GET',
+        withCredentials: true
+    }).success(function (data, status, headers, config) {
+    	$scope.myRankingInfo = data;
+    	$scope.isLogin = true;
+    }).error(function (data, status, headers, config) {
+		$scope.isLogin = false;
+    });
+
+});
+
 // URLのクエリ(game_name)を取得する
 function getQueryGameName() {
     var query = window.location.search.substring(1);
     var vars = query.split("&");
-    for (var i=0;i<vars.length;i++) {
+
+    for (var i = 0; i < vars.length; i++) {
         var pair = vars[i].split("=");
         if (pair[0] === "game_name") {
             return pair[1];
@@ -31,80 +67,23 @@ function getQueryGameName() {
     }
 }
 
-function getGameTitle(){
-	var gameTitle = ""
-	switch(getQueryGameName()){
-		case "honocar":
-			gameTitle = "ほのCar!"
+function getGameTitle(game_name){
+
+	if(!game_name){
+		return "ほのCar!"
 	}
-	return gameTitle;
+	return gameList[game_name];
 }
 
+var gameList = {
+	honocar: "ほのCar!"
+}
 
-var module = angular.module('myApp', []);
-module.controller('myController', function($scope, $http) {
-
-
-    /* login check */
-    $http({
-        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/twitter/oauth/check",
-        method: 'GET',
-        withCredentials: true
-    }).success(function (data, status, headers, config) {
-    	$scope.isLogin = true;
-    }).error(function (data, status, headers, config) {
-    	$scope.isLogin = false;
-    });
-
-	var game_name = getQueryGameName();
-
-
-	$scope.gameTitle = getGameTitle();
-
-	if(game_name != undefined){
-
-		$scope.isSelected = true;
-
-		/* higher ranking */
-	    $http({
-	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/scores/"+game_name+"/ranking",
-	        method: 'GET'
-	    }).success(function (data, status, headers, config) {
-	    	var i = 1
-	    	for(var key in data){
-
-	    		data[key].ranking = i;
-	    		i ++;
-	    	}
-	    	$scope.rankingTable = data;
-	    });
-
-		/* ログインアカウントのランキング */
-	    $http({
-	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/scores/" + game_name +"/me",
-	        method: 'GET',
-	        withCredentials: true
-	    }).success(function (data, status, headers, config) {
-	    	$scope.myRankingInfo = data;
-	    });
-	}else{
-		$scope.isSelected = false;
-	}
-});
 
 </script>
 
 </head>
 <body>
-
-
-
- 
-
-
-
-
-
 
 
 <div ng-controller="myController">
@@ -129,6 +108,9 @@ module.controller('myController', function($scope, $http) {
 
             <!-- 1.ドロップダウンメニューの作成 -->
             <ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href="">CHANGE USER NAME</a>
+				</li>
 				<li ng-show="!isLogin">
 					<a href="http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/twitter/oauth/login?game_name=ranking">LOGIN</a>
 				</li>
@@ -141,28 +123,27 @@ module.controller('myController', function($scope, $http) {
 
 
 	<div class="container">
-	    <div ng-show="isSelected">
 
-		    <div ng-show="isLogin">
-				<h2>Your Ranking</h2>
-				<div>
-					{{myRankingInfo.user_name}}さんの順位は{{myRankingInfo.ranking}}位！
-				</div>
+	    <div ng-show="isLogin">
+			<h2>Your Ranking</h2>
 			<div>
-				<h2>TOP 10 </h2>
-			    <table class="table">
-					<tr>
-						<th>RANKING</th>
-						<th>NAME</th>
-						<th>SCORE</th>
-				    </tr>
-				    <tr ng-repeat="result in rankingTable">
-			            <td>{{result.ranking}}</td>
-					    <td>{{result.user_name}}</td>
-			            <td>{{result.point}}</td>
-			        </tr>
-			    </table>
+				{{myRankingInfo.user_name}}さんの順位は{{myRankingInfo.ranking}}位！
 			</div>
+		</div>
+		<div>		
+			<h2>TOP 10 </h2>
+		    <table class="table">
+				<tr>
+					<th>RANKING</th>
+					<th>NAME</th>
+					<th>SCORE</th>
+			    </tr>
+			    <tr ng-repeat="result in rankingTable">
+		            <td>{{result.ranking}}</td>
+				    <td>{{result.user_name}}</td>
+		            <td>{{result.point}}</td>
+		        </tr>
+		    </table>
 		</div>
 	</div>
 </div>
