@@ -53,12 +53,14 @@ module.controller('myController', function($scope, $http) {
     });
 
 	$scope.changeUserName = function() {
-
-	    $http.post(
-	    	"http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/users/me",
-	        {user_name: $scope.user_name},
-	        {withCredentials: true}
-	    ).success(function (data, status, headers, config) {
+	    $http({
+	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/users/me",
+	        method: 'POST',
+	        withCredentials: true,
+	        data: $.param({
+	        	user_name: $scope.user_name
+	        })
+	    }).success(function (data, status, headers, config) {
 	    	alert("ユーザー名を変更しました！");
 	    }).error(function (data, status, headers, config) {
 			alert("変更処理に失敗しました。");
