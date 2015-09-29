@@ -61,7 +61,7 @@ module.controller('myController', function($scope, $http) {
 	        	user_name: $scope.user_name
 	        },
 	        headers: {
-				Content-Type: application/json
+				"Content-Type": "application/json"
 			}
 	    }).success(function (data, status, headers, config) {
 	    	alert("ユーザー名を変更しました！");
