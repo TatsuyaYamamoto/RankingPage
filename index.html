@@ -57,9 +57,9 @@ module.controller('myController', function($scope, $http) {
 	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/users/" + game_name +"/me",
 	        method: 'POST',
 	        withCredentials: true,
-	        data: {
+	        data: $.param({
 	        	user_name: $scope.user_name;
-	        }
+	        })
 	    }).success(function (data, status, headers, config) {
 	    	alert("ユーザー名を変更しました！");
 	    }).error(function (data, status, headers, config) {
