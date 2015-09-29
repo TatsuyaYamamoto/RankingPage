@@ -63,6 +63,8 @@ function getQueryGameName() {
         var pair = vars[i].split("=");
         if (pair[0] === "game_name") {
             return pair[1];
+        }else{
+        	return config.default.game_name;
         }
     }
 }
@@ -70,13 +72,19 @@ function getQueryGameName() {
 function getGameTitle(game_name){
 
 	if(!game_name){
-		return "ほのCar!"
+		return config.default.gameTitle
 	}
-	return gameList[game_name];
+	return config.gameList[game_name];
 }
 
-var gameList = {
-	honocar: "ほのCar!"
+var config = {
+	default: {
+		game_name: "honocar",
+		gameTitle: "ほのCar!"
+	}
+	gameList: {
+		honocar: "ほのCar!"
+	}
 }
 
 
