@@ -63,7 +63,11 @@ module.controller('myController', function($scope, $http) {
 	    }).success(function (data, status, headers, config) {
 	    	alert("ユーザー名を変更しました！");
 	    }).error(function (data, status, headers, config) {
-			alert("変更処理に失敗しました。");
+	    	if(status == 401){
+	    		alert("ログインセッションが切れています。再ログインしてください。");
+	    	}else{
+	    		alert("変更処理に失敗しました。");
+	    	}
 	    });
 	};
 
