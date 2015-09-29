@@ -54,7 +54,7 @@ module.controller('myController', function($scope, $http) {
 
 	$scope.changeUserName = function() {
 	    $http({
-	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/users/" + game_name +"/me",
+	        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/users/me",
 	        method: 'POST',
 	        withCredentials: true,
 	        data: $.param({
