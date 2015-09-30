@@ -164,21 +164,25 @@ var config = {
 	<div class="container">
 
 	    <div ng-show=true>
-			<h2>Your Ranking</h2>
-			<div class = "text-center">
-				{{myRankingInfo.user_name}}さんの最高得点は....{{myRankingInfo.point}}!!<br>
-				全プレイヤー{{total}}人中、第{{myRankingInfo.ranking}}位！
+			<h2 class = "text-center">YOUR DATA</h2>
+			<h3>Ranking</h3>
+			<div class = "text-center jumbotron">
+				<p>{{myRankingInfo.user_name}}さんの最高得点は....<strong>{{myRankingInfo.point}}！</strong></p>
+				<p>全プレイヤー{{total}}人中、<strong>第{{myRankingInfo.ranking}}位！！</strong></p>
 			</div>
-			<form class="form-inline">
-				<div class="form-group">
-					<input type="text" class="form-control" id="text" placeholder="ユーザー名を変更" size="20" ng-model="user_name">
-				</div>
-				<button type="button" class="btn btn-primary" ng-click="changeUserName()">送信 ≫</button>
-			</form>
+			<h3/>Change User Name</3h>
+			<p>
+				<form class="form-inline">
+					<div class="form-group">
+						<input type="text" class="form-control" id="text" placeholder="新しいユーザー名" size="20" ng-model="user_name">
+					</div>
+					<button type="button" class="btn btn-primary" ng-click="changeUserName()">送信 ≫</button>
+				</form>
+			</p>
 		</div>
 
 		<div>		
-			<h2>TOP 10 </h2>
+			<h2 class = "text-center">TOP 10</h2>
 		    <table class="table">
 				<tr>
 					<th>RANKING</th>
