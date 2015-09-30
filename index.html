@@ -73,7 +73,8 @@ module.controller('myController', function($scope, $http) {
 				"Content-Type": "application/json"
 			}
 	    }).success(function (data, status, headers, config) {
-	    	alert("ユーザー名を変更しました！");
+	    	alert("ユーザー名を変更しました！ページをリロードします。");
+	    	location.reload();
 	    }).error(function (data, status, headers, config) {
 	    	if(status == 401){
 	    		alert("ログインセッションが切れています。再ログインしてください。");
