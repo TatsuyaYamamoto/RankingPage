@@ -183,14 +183,14 @@ var config = {
 			<h2 class = "text-center">TOP 10</h2>
 		    <table class="table">
 				<tr>
-					<th>RANKING</th>
-					<th>NAME</th>
-					<th>SCORE</th>
+					<th class="text-center">RANKING</th>
+					<th class="text-center">NAME</th>
+					<th class="text-center">SCORE</th>
 			    </tr>
 			    <tr ng-repeat="result in rankingTable">
-		            <td>{{result.ranking}}</td>
-				    <td>{{result.user_name}}</td>
-		            <td>{{result.point}}</td>
+		            <td　class="text-center">{{result.ranking}}</td>
+				    <td　class="text-center">{{result.user_name}}</td>
+		            <td　class="text-center">{{result.point}}</td>
 		        </tr>
 		    </table>
 		</div>
