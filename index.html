@@ -163,14 +163,12 @@ var config = {
 
 	<div class="container">
 
-	    <div ng-show=true>
-			<h2 class = "text-center">YOUR DATA</h2>
-			<h3>Ranking</h3>
+	    <div ng-show="isLogin">
 			<div class = "text-center jumbotron">
-				<p>{{myRankingInfo.user_name}}さんの最高得点は....<strong>{{myRankingInfo.point}}！</strong></p>
-				<p>全プレイヤー{{total}}人中、<strong>第{{myRankingInfo.ranking}}位！！</strong></p>
+				<p>{{myRankingInfo.user_name}}さんの最高スコアは....<strong><big>11{{myRankingInfo.point}}</big></strong>台よけたー！</p>
+				<p>全プレイヤー{{total}}人中、<strong>第{{myRankingInfo.ranking}}位！！（・８・）</strong></p>
 			</div>
-			<h3/>Change User Name</3h>
+			<h4/>ユーザー名の変更</h4>
 			<p>
 				<form class="form-inline">
 					<div class="form-group">
@@ -197,6 +195,24 @@ var config = {
 		    </table>
 		</div>
 	</div>
+    <footer>
+	    <div class="container" id="contact">
+	        <div class="row">
+	            <div class="col-lg-10 col-lg-offset-1 text-center">
+	                <ul class="list-inline">
+	                    <li>
+	                        <a href="mailto:sokontokoro.factory@gmail.com"><i class="ffa fa-envelope-o fa-fw fa-3x"></i></a>
+	                    </li>
+	                    <li>
+	                        <a href="https://twitter.com/t28_tatsuya"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+	                    </li>
+	                </ul>
+	                <hr class="small">
+	                <p class="text-muted">Copyright &copy; そこんところ工房 2015</p>
+	            </div>
+	        </div>
+	    </div>
+	</footer>
 </div>
 
 </body>
