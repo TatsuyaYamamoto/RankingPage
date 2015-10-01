@@ -48,7 +48,6 @@ module.controller('myController', function($scope, $http) {
     	$scope.rankingTable = data;
     });
 
-
 	/* ログインアカウントのランキング */
     $http({
         url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/scores/" + game_name +"/me",
@@ -81,8 +80,8 @@ module.controller('myController', function($scope, $http) {
 	    	}else{
 	    		alert("変更処理に失敗しました。");
 	    	}
-	    });
-	};
+	    })
+	}
 
 });
 
@@ -186,10 +185,10 @@ var config = {
 					<th class="text-center">NAME</th>
 					<th class="text-center">SCORE</th>
 			    </tr>
-			    <tr ng-repeat="result in rankingTable">
-		            <td　class="text-center">{{result.ranking}}</td>
-				    <td　class="text-center">{{result.user_name}}</td>
-		            <td　class="text-center">{{result.point}}</td>
+			    <tr class="text-center" ng-repeat="result in rankingTable">
+		            <td>{{result.ranking}}</td>
+				    <td>{{result.user_name}}</td>
+		            <td>{{result.point}}</td>
 		        </tr>
 		    </table>
 		</div>
