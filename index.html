@@ -132,9 +132,8 @@ var config = {
 <div ng-controller="myController">
 
 
-		<h1>スコアランキング {{gameTitle}}</h1>
+	<h1>スコアランキング {{gameTitle}}</h1>
 
-<!-- 1.ドロップダウンメニューの作成 -->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
  
@@ -149,7 +148,6 @@ var config = {
 				</li>
             </ul>
 
-            <!-- 1.ドロップダウンメニューの作成 -->
             <ul class="nav navbar-nav navbar-right">
 				<li ng-show="!isLogin">
 					<a href="http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/twitter/oauth/login?game_name=ranking">LOGIN</a>
