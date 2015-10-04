@@ -20,7 +20,7 @@ var module = angular.module('myApp', []);
 module.controller('myController', function($scope, $http) {
 
 	var game_name = getQueryGameName();
-	$scope.gameTitle = getGameTitle(game_name);
+	$scope.parts = getParts(game_name);
 
 	/* ランキング総数取得 */
 
@@ -99,22 +99,36 @@ function getQueryGameName() {
     }
 }
 
-function getGameTitle(game_name){
+function getParts(game_name){
 
 	if(!game_name){
-		return config.default.gameTitle
+		var parts = {
+			gameTitle: config.gameTitle[config.default.game_name],
+			unit: config.unit[config.default.game_name]
+		}
+	}else{
+		var parts = {
+			gameTitle: config.gameTitle[game_name],
+			unit: config.unit[game_name]
+		}
 	}
-	return config.gameList[game_name];
+	return parts;
 }
+
+
+
 
 var config = {
 	default: {
-		game_name: "honocar",
-		gameTitle: "ほのCar!"
+		game_name: "honocar"
 	},
-	gameList: {
+	gameTitle: {
 		honocar: "ほのCar！",
 		shakarin: "しゃかりん！"
+	},
+	unit: {
+		honocar: "台よけたー！",
+		shakarin: "しゃか！"
 	}
 }
 
@@ -128,7 +142,7 @@ var config = {
 <div ng-controller="myController">
 
 
-	<h1>スコアランキング {{gameTitle}}</h1>
+	<h1>スコアランキング {{parts.gameTitle}}</h1>
 
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -161,7 +175,7 @@ var config = {
 
 	    <div ng-show="isLogin">
 			<div class = "text-center jumbotron">
-				<p>{{myRankingInfo.user_name}}さんの最高スコアは....<strong><big>{{myRankingInfo.point}}</big></strong>台よけたー！</p>
+				<p>{{myRankingInfo.user_name}}さんの最高スコアは....<strong><big>{{myRankingInfo.point}}</big></strong>{{parts.unit}}</p>
 				<p>全プレイヤー{{total}}人中、<strong>第{{myRankingInfo.ranking}}位！！（・８・）</strong></p>
 			</div>
 			<h4/>ユーザー名の変更</h4>
