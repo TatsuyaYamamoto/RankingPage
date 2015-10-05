@@ -28,7 +28,7 @@ module.controller('myController', function($scope, $http) {
         method: 'GET'
     }).success(function (data, status, headers, config) {
     	$scope.scores = data;
-    	$scope.scoresCount = scores.length;
+    	$scope.scoresCount = data.length;
     });
 
 	/* higher ranking */
