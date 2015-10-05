@@ -22,13 +22,13 @@ module.controller('myController', function($scope, $http) {
 	var game_name = getQueryGameName();
 	$scope.parts = getParts(game_name);
 
-	/* ランキング総数取得 */
-
+	/* 全スコアを取得 */
     $http({
-        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/scores/"+game_name+"/count",
+        url: "http://ec2-54-65-78-59.ap-northeast-1.compute.amazonaws.com:8080/api/game/scores/"+game_name,
         method: 'GET'
     }).success(function (data, status, headers, config) {
-    	$scope.total = data.count;
+    	$scope.scores = data;
+    	$scope.scoresCount = scores.length;
     });
 
 	/* higher ranking */
@@ -176,7 +176,7 @@ var config = {
 	    <div ng-show="isLogin">
 			<div class = "text-center jumbotron">
 				<p>{{myRankingInfo.user_name}}さんの最高スコアは....<strong><big>{{myRankingInfo.point}}</big></strong>{{parts.unit}}</p>
-				<p>全プレイヤー{{total}}人中、<strong>第{{myRankingInfo.ranking}}位！！（・８・）</strong></p>
+				<p>全プレイヤー{{scoresCount}}人中、<strong>第{{myRankingInfo.ranking}}位！！（・８・）</strong></p>
 			</div>
 			<h4/>ユーザー名の変更</h4>
 			<p>
